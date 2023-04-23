@@ -280,10 +280,10 @@ BLUE = (0, 0, 255)
 
 rgb = [RED, GREEN, BLUE]
 
-WINDOW_WIDTH = 720
+WINDOW_WIDTH = 920
 WINDOW_HEIGHT = 512
 
-screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.FULLSCREEN)
 pygame.display.set_caption('art gallery problem')
 screen.fill(WHITE)
 myfont = pygame.font.SysFont("Lucida Console", 12)

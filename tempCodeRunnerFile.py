@@ -1,1 +1,1 @@
-IN
+ pygame.display.set_mode
