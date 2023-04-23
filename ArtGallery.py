@@ -281,12 +281,13 @@ BLUE = (0, 0, 255)
 rgb = [RED, GREEN, BLUE]
 
 WINDOW_WIDTH = 920
-WINDOW_HEIGHT = 512
+WINDOW_HEIGHT = 652
 
-screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.FULLSCREEN)
+screen = pygame.display.set_mode(
+    (WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption('art gallery problem')
 screen.fill(WHITE)
-myfont = pygame.font.SysFont("Lucida Console", 12)
+myfont = pygame.font.SysFont("lucida grande", 12)
 # label1 = myfont.render(
 #     "Place first point (LEFT-MOUSE-CLICK), Load Polygon from file (SPACE)", 1,
 #     BLACK)
