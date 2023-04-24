@@ -9,7 +9,7 @@ import pygame
 import sys
 from pygame import gfxdraw
 import mcoloring
-import PolygonVisibility
+# import PolygonVisibility
 from pygame.locals import *
 import polytri
 import easygui
@@ -126,16 +126,16 @@ def displayVariation(variation, guard):
         for p in variation:
             pygame.draw.circle(
                 screen, rgb[validColors[currVariationDisplayed]], p[1], 5)
-    if guard != 0:
-        displayStatus("Loading...")
-        pygame.display.update()
-        visibility = PolygonVisibility.computeVisibility(
-            points, variation[guard - 1][1])
-        gfxdraw.filled_polygon(screen, visibility, BLUE)
-        pygame.draw.circle(screen, BLACK, variation[guard - 1][1], 5)
+    # if guard != 0:
+    #     displayStatus("Loading...")
+    #     pygame.display.update()
+    #     visibility = PolygonVisibility.computeVisibility(
+    #         points, variation[guard - 1][1])
+    #     gfxdraw.filled_polygon(screen, visibility, BLUE)
+    #     pygame.draw.circle(screen, BLACK, variation[guard - 1][1], 5)
 
-        displayStatus("Visibility for variation " + str(currVariationDisplayed + 1) + "'s guard no. " + str(
-            guard) + " out of " + str(len(variation)))
+    #     displayStatus("Visibility for variation " + str(currVariationDisplayed + 1) + "'s guard no. " + str(
+    #         guard) + " out of " + str(len(variation)))
 
 
 def process():
