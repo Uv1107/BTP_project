@@ -16,29 +16,10 @@ import easygui
 
 
 def _intersection(P1, P2, P3):
-    """
-    Intersection support function
-    :param P1: point 1
-    :param P2: point 2
-    :param P3: point 3
-    :return:
-    """
     return (P3[1] - P1[1]) * (P2[0] - P1[0]) > (P2[1] - P1[1]) * (P3[0] - P1[0])
 
 
 def findIntersection(S1x, S1y, D1x, D1y, S2x, S2y, D2x, D2y):
-    """
-    Find if 2 line segments intersect
-    :param S1x: x coordinate of segment 1's start point
-    :param S1y: y coordinate of segment 1's start point
-    :param D1x: x coordinate of segment 1's end point
-    :param D1y: y coordinate of segment 1's end point
-    :param S2x: x coordinate of segment 2's start point
-    :param S2y: y coordinate of segment 2's start point
-    :param D2x: x coordinate of segment 2's end point
-    :param D2y: y coordinate of segment 2's end point
-    :return: Intersection point [x,y]
-    """
     return _intersection([S1x, S1y], [S2x, S2y], [D2x, D2y]) != _intersection([D1x, D1y], [S2x, S2y], [D2x, D2y]) and _intersection([S1x, S1y], [D1x, D1y], [S2x, S2y]) != _intersection([S1x, S1y], [D1x, D1y], [D2x, D2y])
 
 
@@ -86,10 +67,6 @@ def displayStatus(statusMsg):
 
 
 def drawPolygon():
-    """
-    Function to draw the polygon
-    :return:
-    """
     pygame.font.init()
     myfont2 = pygame.font.SysFont('Comic Sans MS', 10)
 
@@ -272,11 +249,11 @@ def display3Colors(i):
 
 pygame.init()
 
-WHITE = (255, 255, 255)
+WHITE = (234, 237, 183)
 BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
+RED = (255, 3, 247)
+GREEN = (22, 230, 7)
+BLUE = (3, 248, 252)
 
 rgb = [RED, GREEN, BLUE]
 
