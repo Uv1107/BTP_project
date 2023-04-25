@@ -8,10 +8,10 @@ using Triangulation and Edge Detection
 import pygame
 import sys
 from pygame import gfxdraw
-import mcoloring
-# import PolygonVisibility
+import Three_coloring
+import Three_coloring
 from pygame.locals import *
-import polytri
+import triangulation
 import easygui
 
 
@@ -24,11 +24,6 @@ def findIntersection(S1x, S1y, D1x, D1y, S2x, S2y, D2x, D2y):
 
 
 def displayStatus(statusMsg):
-    """
-    Function to display the current status of the tool
-    :param statusMsg: Status Message
-    :return:
-    """
     gfxdraw.filled_polygon(
         screen, [[0, 0], [0, 24], [WINDOW_WIDTH, 24], [WINDOW_WIDTH, 0]], WHITE)
     status = myfont.render(
@@ -81,12 +76,6 @@ def drawPolygon():
 
 
 def displayVariation(variation, guard):
-    """
-    Display a variation of the Art gallery problem and the visibility of the specified guard
-    :param variation: the variation to be displayed
-    :param guard: 0 for showing no guard's visibility or guard's id
-    :return:
-    """
     screen.fill(WHITE)
 
     # displayLabel1("Switch between Variations (LEFT or RIGHT), Switch guard visibility (UP or DOWN),")
@@ -116,12 +105,8 @@ def displayVariation(variation, guard):
 
 
 def process():
-    """
-    Process the Algorithm (Edge clipping & 3 - coloring)
-    :return:
-    """
     # print(points)
-    gen = polytri.triangulate_poly(pts)
+    gen = triangulation.triangulate_poly(pts)
     adj_matrix = [[0 for __ in range(count)] for _ in range(count)]
 
     for x in gen:
@@ -135,7 +120,7 @@ def process():
         adj_matrix[x[2][2]][x[0][2]] = 1
         adj_matrix[x[0][2]][x[2][2]] = 1
 
-    g = mcoloring.Graph(count)
+    g = Three_coloring.Graph(count)
     g.graph = adj_matrix
     m = 3
     coloring = g.graphColouring(m)
@@ -156,11 +141,6 @@ def process():
 
 
 def displayNext(i):
-    """
-    Display next step
-    :param i: step number to be displayed
-    :return:
-    """
     if i < len(triangles):
         gfxdraw.filled_polygon(
             screen, [triangles[i][0][:2], triangles[i][1][:2], triangles[i][2][:2]], RED)
@@ -170,12 +150,6 @@ def displayNext(i):
 
 
 def displayPrev(index, mode):
-    """
-    Display previous step
-    :param index: step number to be displayed
-    :param mode: 0 for triangulation steps, 1 for 3 coloring steps
-    :return:
-    """
     indexTri = index
     if mode == 1:
         indexTri = len(triangles) - 1
@@ -210,10 +184,6 @@ def displayPrev(index, mode):
 
 
 def displayTriangulated():
-    """
-    Display Triangulated Polygon
-    :return:
-    """
     screen.fill(WHITE)
     displayStatus("Displaying Triangulated Polygon")
     # displayLabel1("Next step (RIGHT), Previous step (LEFT),")
@@ -234,11 +204,6 @@ def displayTriangulated():
 
 
 def display3Colors(i):
-    """
-    Display 3 coloring step
-    :param i: step number
-    :return:
-    """
     index = -1
     for pt in points:
         index += 1
