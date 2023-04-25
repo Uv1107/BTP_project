@@ -230,7 +230,7 @@ screen = pygame.display.set_mode(
     (WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption('art gallery problem')
 screen.fill(WHITE)
-myfont = pygame.font.SysFont("lucida grande", 19)
+myfont = pygame.font.SysFont("lucida grande", 14)
 # label1 = myfont.render(
 #     "Place first point (LEFT-MOUSE-CLICK), Load Polygon from file (SPACE)", 1,
 #     BLACK)
