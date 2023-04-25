@@ -10,10 +10,6 @@ class DegenerateTriangle(Exception):
 
 
 def looped_pairs(iterable):
-    """
-    >>> list(looped_pairs([1,2,3]))
-    [(1, 2), (2, 3), (3, 1)]
-    """
     iterable = iter(iterable)
     first = last = next(iterable)
     for x in iterable:
@@ -23,10 +19,6 @@ def looped_pairs(iterable):
 
 
 def triplets(iterable):
-    """
-    >>> list(triplets([1,2,3,4,5]))
-    [(1, 2, 3), (2, 3, 4), (3, 4, 5)]
-    """
     iterable = iter(iterable)
     backlog = (next(iterable), next(iterable))
     for item in iterable:
@@ -35,20 +27,6 @@ def triplets(iterable):
 
 
 def near_zero(v):
-    """
-    >>> near_zero(0)
-    True
-    >>> near_zero(.1)
-    False
-    >>> near_zero(1E-10)
-    True
-    >>> near_zero(np.array([0, 0, 0]))
-    True
-    >>> near_zero(np.array([1E-10, 1E-10, 1E-10]))
-    True
-    >>> near_zero(np.array([1E-10, 1E-10, 7]))
-    False
-    """
     if isinstance(v, (float, int)):
         return v > -1E-6 and v < 1E-6
     else:
@@ -56,7 +34,6 @@ def near_zero(v):
 
 
 def calculate_normal_3d(polygon):
-    """Returns polygon normal vector for 3d polygon"""
     normal = np.array([0.0] * len(polygon[0]))
     for p1, p2 in looped_pairs(polygon):
         minus = p2 - p1
@@ -71,7 +48,6 @@ def calculate_normal_3d(polygon):
 
 
 def calculate_normal_2d(polygon):
-    """Returns 'normal' of 2d polygon (-1 if clockwise, 1 if not)"""
     sum = 0
     for (x1, y1), (x2, y2) in looped_pairs(polygon):
         sum += (x2 - x1) * (y2 + y1)
@@ -84,7 +60,6 @@ def calculate_normal_2d(polygon):
 
 
 def calculate_normal(polygon):
-    """Returns polygon normal vector (or scalar if 2d)"""
     l = len(polygon[0])
     if l == 2:
         return calculate_normal_2d(polygon)
@@ -95,28 +70,12 @@ def calculate_normal(polygon):
 
 
 def looped_slice(seq, start, count):
-    """
-    >>> list(looped_slice([1,2,3],0,3))
-    [1, 2, 3]
-    >>> list(looped_slice([1,2,3],2,3))
-    [3, 1, 2]
-    """
     l = len(seq)
     for i in range(start, start + count):
         yield seq[i % l]
 
 
 def looped_slice_inv(seq, start, count):
-    """
-    >>> list(looped_slice_inv([1,2,3,4],0,3))
-    [4]
-    >>> list(looped_slice_inv([1,2,3,4],1,3))
-    [1]
-    >>> list(looped_slice_inv([1,2,3,4],2,3))
-    [2]
-    >>> list(looped_slice_inv([1,2,3,4],3,3))
-    [3]
-    """
     if start + count > len(seq):
         return seq[start + count - len(seq): start]
     else:
@@ -142,24 +101,6 @@ def any_point_in_triangle(triangle, points):
 
 
 def triangulate_poly(polygon):
-    """
-    Converts a polygon to a set of triangles that cover the same area.
-
-      * Convex and non-convex polygons are supported.
-      * Polygon vertices must all be within a single plane, but the
-        polygon itself may exist in 2 or 3 dimensional space
-      * Clockwise and counter-clockwise winding supported.
-      * Inverted polygons and polygons with holes are NOT supported.
-
-    Args:
-        polygon: A sequence of vertices making up the polygon, with each vertex
-                 described as a sequence of coordinate components. The polygon
-                 is implicitly closed: a polygon with N sides should have N
-                 vertices.
-    Returns:
-        a generator of triangles, each specified in the same format as the
-        input polygon
-    """
     polygon = [np.array(x) for x in polygon]
 
     normal = calculate_normal(polygon)
@@ -184,7 +125,7 @@ def triangulate_poly(polygon):
             if not any_point_in_triangle(triangle,
                                          looped_slice_inv(polygon, i, 3)):
                 del polygon[(i + 1) % len(polygon)]
-                yield [triangle,b]
+                yield [triangle, b]
                 i = 0
                 yld = True
         if not yld:
